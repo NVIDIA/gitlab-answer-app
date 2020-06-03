@@ -27,10 +27,16 @@ module.exports = app => {
     }
 
     const issueComment = context.issue({
-      body: `Thanks for your contribution!
+      body: `Hello There!
+
+Thanks for your contribution!
 This repository is a read-only mirror of the following repository: ${gitlabRepo}
-Do you mind opening a pull request against that repo?\n
-Thanks!`
+
+Do you mind:
+- Opening a pull request against that repo?
+- Making sure your work is signed: https://help.github.com/en/github/authenticating-to-github/signing-commits
+
+Thanks again!`
     })
 
     app.log('Issue created on repo:', repo)
