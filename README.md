@@ -3,6 +3,8 @@
 A GitHub App built with [Probot](https://github.com/probot/probot).
 Redirects Github PR contributors to the matching Gitlab repository.
 
+Application is deployed on the cloud native heroku account for every commit to master.
+
 ## Setup
 
 ```sh
