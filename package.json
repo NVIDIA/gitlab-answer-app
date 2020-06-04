@@ -4,7 +4,7 @@
   "private": true,
   "description": "A Probot app",
   "author": "Renaud Gaubert <rgaubert@nvidia.com>",
-  "license": "ISC",
+  "license": "Apache 2.0",
   "repository": "https://github.com/RenaudWasTaken/my-first-app.git",
   "homepage": "https://github.com/RenaudWasTaken/my-first-app",
   "bugs": "https://github.com/RenaudWasTaken/my-first-app/issues",
