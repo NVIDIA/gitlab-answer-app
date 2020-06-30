@@ -48,8 +48,8 @@ Thanks for your contribution!
 This repository is a read-only mirror of the following repository: ${gitlabRepo}
 
 Do you mind:
-- Opening a pull request against that repo?
-- Making sure your work is signed: https://help.github.com/en/github/authenticating-to-github/signing-commits
+- [ ] Opening a pull request against that repo?
+- [ ] Making sure your work is signed: https://help.github.com/en/github/authenticating-to-github/signing-commits
 
 Thanks again!`
     })
