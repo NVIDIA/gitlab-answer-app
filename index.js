@@ -34,7 +34,7 @@ module.exports = app => {
   // Your code here
   app.log('Yay, the app was loaded!')
 
-  app.on('pull_requests.opened', async context => {
+  app.on('pull_request.opened', async context => {
     const repo = context.payload.repository.name
     var gitlabRepo = 'https://gitlab.com/nvidia/'
     if (repo in repos) {
