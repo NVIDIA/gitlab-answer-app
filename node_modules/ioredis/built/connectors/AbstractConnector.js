@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const utils_1 = require("../utils");
+const debug = utils_1.Debug("AbstractConnector");
 class AbstractConnector {
-    constructor() {
+    constructor(disconnectTimeout) {
         this.connecting = false;
+        this.disconnectTimeout = disconnectTimeout;
     }
     check(info) {
         return true;
@@ -10,7 +13,13 @@ class AbstractConnector {
     disconnect() {
         this.connecting = false;
         if (this.stream) {
-            this.stream.end();
+            const stream = this.stream; // Make sure callbacks refer to the same instance
+            const timeout = setTimeout(() => {
+                debug("stream %s:%s still open, destroying it", stream.remoteAddress, stream.remotePort);
+                stream.destroy();
+            }, this.disconnectTimeout);
+            stream.on("close", () => clearTimeout(timeout));
+            stream.end();
         }
     }
 }

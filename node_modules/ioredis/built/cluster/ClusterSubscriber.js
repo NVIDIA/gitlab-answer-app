@@ -4,7 +4,6 @@ const util_1 = require("./util");
 const utils_1 = require("../utils");
 const redis_1 = require("../redis");
 const debug = utils_1.Debug("cluster:subscriber");
-const SUBSCRIBER_CONNECTION_NAME = "ioredisClusterSubscriber";
 class ClusterSubscriber {
     constructor(connectionPool, emitter) {
         this.connectionPool = connectionPool;
@@ -38,6 +37,9 @@ class ClusterSubscriber {
         if (lastActiveSubscriber) {
             lastActiveSubscriber.disconnect();
         }
+        if (this.subscriber) {
+            this.subscriber.disconnect();
+        }
         const sampleNode = utils_1.sample(this.connectionPool.getNodes());
         if (!sampleNode) {
             debug("selecting subscriber failed since there is no node discovered in the cluster yet");
@@ -61,7 +63,7 @@ class ClusterSubscriber {
             username: options.username,
             password: options.password,
             enableReadyCheck: true,
-            connectionName: SUBSCRIBER_CONNECTION_NAME,
+            connectionName: util_1.getConnectionName("subscriber", options.connectionName),
             lazyConnect: true,
             tls: options.tls,
         });
@@ -90,7 +92,10 @@ class ClusterSubscriber {
                             this.lastActiveSubscriber = this.subscriber;
                         }
                     })
-                        .catch(utils_1.noop);
+                        .catch(() => {
+                        // TODO: should probably disconnect the subscriber and try again.
+                        debug("failed to %s %d channels", type, channels.length);
+                    });
                 }
             }
         }
