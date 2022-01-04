@@ -28,7 +28,7 @@
     "jest": "^27.0.4",
     "nock": "^13.1.0",
     "nodemon": "^2.0.7",
-    "smee-client": "^1.2.2",
+    "smee-client": "^1.0.1",
     "standard": "^16.0.3"
   },
   "engines": {
