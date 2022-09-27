@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.FSEventsWatcher = void 0;
+
 function _events() {
   const data = require('events');
 
@@ -106,21 +111,15 @@ function _interopRequireWildcard(obj, nodeInterop) {
   return newObj;
 }
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+// @ts-expect-error no types
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error, @typescript-eslint/ban-ts-comment
 // @ts-ignore: this is for CI which runs linux and might not have this
 let fsevents = null;
 
@@ -140,6 +139,15 @@ const ALL_EVENT = 'all';
  * Watches `dir`.
  */
 class FSEventsWatcher extends _events().EventEmitter {
+  root;
+  ignored;
+  glob;
+  dot;
+  hasIgnore;
+  doIgnore;
+  fsEventsWatchStopper;
+  _tracked;
+
   static isSupported() {
     return fsevents !== null;
   }
@@ -176,23 +184,6 @@ class FSEventsWatcher extends _events().EventEmitter {
     }
 
     super();
-
-    _defineProperty(this, 'root', void 0);
-
-    _defineProperty(this, 'ignored', void 0);
-
-    _defineProperty(this, 'glob', void 0);
-
-    _defineProperty(this, 'dot', void 0);
-
-    _defineProperty(this, 'hasIgnore', void 0);
-
-    _defineProperty(this, 'doIgnore', void 0);
-
-    _defineProperty(this, 'fsEventsWatchStopper', void 0);
-
-    _defineProperty(this, '_tracked', void 0);
-
     this.dot = opts.dot || false;
     this.ignored = opts.ignored;
     this.glob = Array.isArray(opts.glob) ? opts.glob : [opts.glob];
@@ -291,4 +282,4 @@ class FSEventsWatcher extends _events().EventEmitter {
   }
 }
 
-module.exports = FSEventsWatcher;
+exports.FSEventsWatcher = FSEventsWatcher;
