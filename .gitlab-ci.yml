@@ -2,7 +2,6 @@ stages:
 - release
 
 release:
-  type: deploy
   stage: release
   image: ruby:latest
   script:
