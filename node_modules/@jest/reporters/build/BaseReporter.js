@@ -15,34 +15,25 @@ function _jestUtil() {
   return data;
 }
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 const {remove: preRunMessageRemove} = _jestUtil().preRunMessage;
 
 class BaseReporter {
-  constructor() {
-    _defineProperty(this, '_error', void 0);
-  }
+  _error;
 
   log(message) {
-    process.stderr.write(message + '\n');
+    process.stderr.write(`${message}\n`);
   }
 
   onRunStart(_results, _options) {
     preRunMessageRemove(process.stderr);
   }
+  /* eslint-disable @typescript-eslint/no-empty-function */
 
   onTestCaseResult(_test, _testCaseResult) {}
 
@@ -50,7 +41,8 @@ class BaseReporter {
 
   onTestStart(_test) {}
 
-  onRunComplete(_contexts, _aggregatedResults) {}
+  onRunComplete(_testContexts, _aggregatedResults) {}
+  /* eslint-enable */
 
   _setError(error) {
     this._error = error;
